@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/04 17:13:24 by jekim            ###   ########.fr       */
+/*   Created: 2021/01/01 01:02:49 by jekim             #+#    #+#             */
+/*   Updated: 2021/05/30 03:17:16 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./client.h"
+#include "libft.h"
 
-
-int main(int argc, char **argv)
+int	ft_toupper(int c)
 {
-	printf("%s\n", "hello, this is client!");
-	return (0);
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
 }
-
-
-

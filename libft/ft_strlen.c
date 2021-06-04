@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/04 17:13:24 by jekim            ###   ########.fr       */
+/*   Created: 2020/12/26 00:30:31 by jekim             #+#    #+#             */
+/*   Updated: 2021/01/11 14:52:04 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./client.h"
+#include "libft.h"
 
-
-int main(int argc, char **argv)
+size_t	ft_strlen(const char *src)
 {
-	printf("%s\n", "hello, this is client!");
-	return (0);
+	const char *tmp;
+
+	tmp = src;
+	if (!src)
+		return (0);
+	while (*tmp++)
+		;
+	return (size_t)(tmp - src - 1);
 }
-
-
-

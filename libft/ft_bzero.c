@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/04 17:13:24 by jekim            ###   ########.fr       */
+/*   Created: 2020/12/26 01:00:34 by jekim             #+#    #+#             */
+/*   Updated: 2021/01/11 16:13:56 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./client.h"
+#include "libft.h"
 
-
-int main(int argc, char **argv)
+void	ft_bzero(void *dst, size_t n)
 {
-	printf("%s\n", "hello, this is client!");
-	return (0);
+	unsigned char *temp;
+
+	if (!dst)
+		return ;
+	temp = dst;
+	while (n--)
+	{
+		*temp++ = 0;
+	}
 }
-
-
-

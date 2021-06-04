@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/04 17:13:24 by jekim            ###   ########.fr       */
+/*   Created: 2021/01/05 21:50:27 by jekim             #+#    #+#             */
+/*   Updated: 2021/01/06 22:55:54 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./client.h"
+#include "libft.h"
 
-
-int main(int argc, char **argv)
+int	ft_isalnum(int c)
 {
-	printf("%s\n", "hello, this is client!");
-	return (0);
+	return (ft_isdigit(c) || ft_isalpha(c));
 }
-
-
-

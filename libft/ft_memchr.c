@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/04 17:13:24 by jekim            ###   ########.fr       */
+/*   Created: 2021/01/10 23:40:43 by jekim             #+#    #+#             */
+/*   Updated: 2021/01/11 02:03:17 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./client.h"
+#include "libft.h"
 
-
-int main(int argc, char **argv)
+void	*ft_memchr(const void *src, int c, size_t n)
 {
-	printf("%s\n", "hello, this is client!");
+	unsigned char *s;
+	unsigned char find;
+
+	if (!src)
+		return (NULL);
+	s = (unsigned char *)src;
+	find = c;
+	while (n--)
+	{
+		if (*s != find)
+			s++;
+		else
+			return (s);
+	}
 	return (0);
 }
-
-
-

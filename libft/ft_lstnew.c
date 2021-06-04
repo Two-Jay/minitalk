@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/04 17:13:24 by jekim            ###   ########.fr       */
+/*   Created: 2021/01/12 08:48:58 by jekim             #+#    #+#             */
+/*   Updated: 2021/01/17 19:23:38 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./client.h"
+#include "libft.h"
 
-
-int main(int argc, char **argv)
+t_list	*ft_lstnew(void *content)
 {
-	printf("%s\n", "hello, this is client!");
-	return (0);
+	t_list	*node;
+
+	if (!(node = (t_list *)malloc(sizeof(t_list))))
+		return (NULL);
+	node->content = content ? content : NULL;
+	node->next = NULL;
+	return (node);
 }
-
-
-

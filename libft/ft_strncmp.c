@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/04 17:13:24 by jekim            ###   ########.fr       */
+/*   Created: 2020/11/30 16:10:54 by jekim             #+#    #+#             */
+/*   Updated: 2021/01/11 14:52:37 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./client.h"
+#include "libft.h"
 
-
-int main(int argc, char **argv)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	printf("%s\n", "hello, this is client!");
-	return (0);
+	size_t i;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (s1[i] - s2[i]);
+	while (i < n - 1)
+	{
+		if (s1[i] && s2[i] && s1[i] == s2[i])
+			i++;
+	}
+	return (s1[i] - s2[i]);
 }
-
-
-

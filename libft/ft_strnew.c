@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/04 17:13:24 by jekim            ###   ########.fr       */
+/*   Created: 2021/05/30 03:05:59 by jekim             #+#    #+#             */
+/*   Updated: 2021/05/30 03:26:14 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./client.h"
+#include "libft.h"
 
-
-int main(int argc, char **argv)
+char	*ft_strnew(char *str, size_t strlen)
 {
-	printf("%s\n", "hello, this is client!");
-	return (0);
+	char	*ret;
+	size_t	ix;
+
+	ix = 0;
+	ret = (char *)malloc(sizeof(char) * (strlen + 1));
+	if (!ret)
+		return (NULL);
+	while (ix < strlen)
+	{
+		ret[ix] = str[ix];
+		ix++;
+	}
+	str[ix] = '\0';
+	return (ret);
 }
-
-
-

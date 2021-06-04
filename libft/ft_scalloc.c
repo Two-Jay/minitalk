@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_scalloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/04 17:13:24 by jekim            ###   ########.fr       */
+/*   Created: 2021/05/30 03:22:16 by jekim             #+#    #+#             */
+/*   Updated: 2021/05/30 03:23:03 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./client.h"
+#include "libft.h"
 
-
-int main(int argc, char **argv)
+void		*ft_scalloc(size_t count, size_t size)
 {
-	printf("%s\n", "hello, this is client!");
-	return (0);
+	void	*ptr;
+
+	if (!(ptr = malloc(count * size)))
+		exit(EXIT_FAILURE);
+	ft_bzero(ptr, (count * size));
+	return (ptr);
 }
-
-
-

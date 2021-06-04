@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/04 17:13:24 by jekim            ###   ########.fr       */
+/*   Created: 2021/01/07 08:44:53 by jekim             #+#    #+#             */
+/*   Updated: 2021/01/11 01:50:14 by jseo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./client.h"
+#include "libft.h"
 
-
-int main(int argc, char **argv)
+char	*ft_strchr(const char *src, int c)
 {
-	printf("%s\n", "hello, this is client!");
-	return (0);
+	if (!src)
+		return (NULL);
+	while (*src && *src != (char)c)
+		src++;
+	if (*src == (char)c)
+		return ((char *)src);
+	return (NULL);
 }
-
-
-
