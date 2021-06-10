@@ -6,11 +6,11 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 20:47:47 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/10 21:00:55 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/10 21:31:35 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft.h"
+#include "libft.h"
 
 int	ft_intlen(int nbr, int base)
 {
