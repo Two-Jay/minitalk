@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:48:12 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/11 20:29:35 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/12 00:41:27 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ int ft_pidprint(int pid)
 int main(int argc, char **argv)
 {
 	ft_pidprint(getpid());
+	// get client_pid
+	// get msg lenght
+	// get msg and write
+	// 
 	return (0);	
 }
