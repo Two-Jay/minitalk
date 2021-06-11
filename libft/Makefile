@@ -6,7 +6,7 @@
 #    By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/11 02:25:46 by jseo              #+#    #+#              #
-#    Updated: 2021/06/10 21:31:49 by jekim            ###   ########.fr        #
+#    Updated: 2021/06/11 19:51:28 by jekim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ BONUS			=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
 BONUS_OBJS		= $(BONUS:.c=.o)
 
 CC				= gcc
-RM				= rm -f
+RM				= rm -rf
 CFLAGS			= -Wall -Wextra -Werror -I.
 
 NAME			= libft.a
