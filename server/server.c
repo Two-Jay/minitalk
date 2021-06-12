@@ -6,13 +6,13 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:48:12 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/12 00:41:27 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/12 11:17:28 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./server.h"
 
-int ft_pidprint(int pid)
+static int ft_pidprint(int pid)
 {
 	char	*buf;
 
@@ -25,12 +25,23 @@ int ft_pidprint(int pid)
 	return (0);
 }
 
+static void ft_receive_msg(int signo)
+{
+	if (signo == SIGUSR2)
+		write(1, "1", 1);
+	else
+		write(1, "0", 1);
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
 	ft_pidprint(getpid());
-	// get client_pid
-	// get msg lenght
-	// get msg and write
-	// 
+	signal(SIGUSR2, ft_receive_msg);
+	signal(SIGUSR1, ft_receive_msg);
+	while (1)
+	{
+		pause();
+	}
 	return (0);	
 }

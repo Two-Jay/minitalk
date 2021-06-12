@@ -6,15 +6,21 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/12 00:42:17 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/12 10:31:43 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./client.h"
 
+static int	ft_kill_errh(int pid, int signo)
+{
+	if (kill(pid, signo) == -1)
+		ft_strerr("Error : kill error");
+}
+
 // int ft_send_cli_pid()
 // int ft_send_msg_length()
-static void ft_send_msg_proto(char *msg)
+static int	ft_send_msg_proto(int pid, char *msg)
 {
 	int ix;
 	int temp;
@@ -27,14 +33,15 @@ static void ft_send_msg_proto(char *msg)
 		while (ix < 8)
 		{
 			if ((*msg & bit_mask) == 1)
-				write(1, "1", 1);
+				ft_kill_errh(pid, SIGUSR2);
 			else
-				write(1, "0", 1);
+				ft_kill_errh(pid, SIGUSR1);
 			*msg >>= 1;
 			ix++;
 		}
 		msg++;
 	}
+	return (0);
 }
 
 int ft_pidprint(int pid)
@@ -70,5 +77,5 @@ int main(int argc, char **argv)
 	client_pid = getpid();
 	ft_validate_input(argc, argv, &server_pid);
 	ft_pidprint(client_pid);
-	ft_send_msg_proto(argv[2]);
+	ft_send_msg_proto(server_pid, argv[2]);
 }
