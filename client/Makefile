@@ -5,33 +5,38 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jekim <arabi1549@naver.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/06/16 15:55:52 by jekim             #+#    #+#              #
-#    Updated: 2021/06/16 19:37:25 by jekim            ###   ########.fr        #
+#    Created: 2021/06/11 19:21:52 by jekim             #+#    #+#              #
+#    Updated: 2021/06/16 20:16:32 by jekim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	minitalk
-LIBFTDIR	=	./libft/
-CLIDIR		=	./client/
-SRVDIR		=	./server/
 
-all			:
-		@$(MAKE) -C $(LIBFTDIR)
-		@$(MAKE) -C	$(CLIDIR)
-		@$(MAKE) -C	$(SRVDIR)
-		@echo "\033[0;94m*----- $(NAME) was compiled -----*\033[0m"
+NAME		=	client
+CC			=	gcc
+CCFLAG		=	-Wall -Wextra -Werror
+SNTZ		=	-g3 -fsanitize=address
+
+SOURCES		=	client.c client1.c
+
+HEADERS		=	-I.
+OBJECTS		=	$(SOURCES:.c=.o)
+
+LIBPATH		=	../libft/
+LIBFLAG		=	 -lft -L$(LIBPATH)
+
+all			:	$(NAME)
+
+$(NAME)		:	$(OBJECTS)
+		$(CC) $(CCFLAG) $(LIBFLAG) $(SNTZ) $(HEADERS) $(OBJECTS) -o $(NAME)
+		@echo "\033[0;92m* $(NAME) program file was created *\033[0m"
 
 clean		:
-		@$(MAKE) -C $(LIBFTDIR) clean
-		@$(MAKE) -C	$(CLIDIR) clean
-		@$(MAKE) -C	$(SRVDIR) clean
-		@echo "\033[0;91m*----- $(NAME)'s object files was deleted -----*\033[0m"
+		rm -rf $(OBJECTS)
+		@echo "\033[0;91m* $(NAME) object files was deleted *\033[0m"
 
-fclean		:
-		@$(MAKE) -C $(LIBFTDIR) fclean
-		@$(MAKE) -C	$(CLIDIR) fclean
-		@$(MAKE) -C	$(SRVDIR) fclean
-		@echo "\033[0;91m*----- $(NAME) was deleted -----*\033[0m"
+fclean		:	clean
+		rm -rf $(NAME)
+		@echo "\033[0;91m* $(NAME) was deleted *\033[0m"
 
 re			:	fclean all
 

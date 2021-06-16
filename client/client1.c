@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   client1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/12 17:51:18 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/12 17:52:29 by jekim            ###   ########.fr       */
+/*   Created: 2021/06/16 20:15:40 by jekim             #+#    #+#             */
+/*   Updated: 2021/06/16 23:31:20 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "./client.h"
 
-int main()
+void ft_accecpt_res(int signo)
 {
-    int t;
+    return ;
+}
 
-    t = 1;
-    printf("%lu\n", sizeof(t));
-    return (0);
+void ft_accecpt_err(int signo)
+{
+    ft_strerr("Error : invalid response");
+}
+
+void ft_pingpong_cli(pid_t srvpid, int signo)
+{
+	kill(srvpid, signo);
+	pause();
 }

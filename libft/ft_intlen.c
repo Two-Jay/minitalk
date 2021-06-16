@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_intlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/30 03:05:59 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/16 15:55:33 by jekim            ###   ########.fr       */
+/*   Created: 2021/06/10 20:47:47 by jekim             #+#    #+#             */
+/*   Updated: 2021/06/10 21:31:35 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnew(char *str, size_t strlen)
+int	ft_intlen(int nbr, int base)
 {
-	char	*ret;
-	size_t	ix;
+	int len;
 
-	ix = 0;
-	ret = (char *)malloc(sizeof(char) * (strlen + 1));
-	if (!ret)
-		return (NULL);
-	while (ix < strlen)
+	len = 0;
+	if (nbr < 0)
 	{
-		ret[ix] = str[ix];
-		ix++;
+		nbr = nbr * -1;
+		len++;
 	}
-	str[ix] = '\0';
-	return (ret);
+	while (nbr > 0)
+	{
+		nbr = nbr / base;
+		len++;
+	}
+	return (len);
 }

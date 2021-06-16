@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 04:17:12 by jekim             #+#    #+#             */
-/*   Updated: 2021/05/30 03:24:18 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/16 15:56:12 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void				ft_putstr_fd(char *s, int fd);
 */
 char				*ft_itoa(int n);
 int					ft_atoi(const char *nptr);
+int					ft_intlen(int nbr, int base);
 
 /*
 ** memory management functions
