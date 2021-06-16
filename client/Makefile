@@ -6,7 +6,7 @@
 #    By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/11 19:21:52 by jekim             #+#    #+#              #
-#    Updated: 2021/06/11 20:21:28 by jekim            ###   ########.fr        #
+#    Updated: 2021/06/13 00:04:19 by jekim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,13 @@ NAME		=	client
 CC			=	gcc
 CCFLAG		=	-Wall -Wextra -Werror
 
-SOURCES		=	client.c
+SOURCES		=	client.c client1.c
 
 HEADERS		=	-I.
 OBJECTS		=	$(SOURCES:.c=.o)
 
 LIBPATH		=	../libft/
-LIBFLAG		=	 -L$(LIBPATH) -lft
+LIBFLAG		=	 -lft -L$(LIBPATH)
 
 all			:	$(NAME)
 
