@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/04 19:18:33 by jekim            ###   ########.fr       */
+/*   Created: 2021/06/12 17:51:18 by jekim             #+#    #+#             */
+/*   Updated: 2021/06/12 17:52:29 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./client.h"
+#include <stdio.h>
 
-
-int main(int argc, char **argv)
+int main()
 {
-	printf("%s\n", "hello, this is client!");
-	return (0);
+    int t;
+
+    t = 1;
+    printf("%lu\n", sizeof(t));
+    return (0);
 }
-
-
-
