@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:48:12 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/17 00:58:10 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/18 13:18:40 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,32 +42,21 @@ static void	ft_initialize_req()
 	g_request.clipid = 0;
 	g_request.len = 0;
 	g_request.msg = NULL;
+	g_request.msg_bc = 0;
 }
 
 static void ft_receive_msg(int signo, siginfo_t *siginfo, void *context)
 {
-	static int ix;
-	static int size;
-	
-	size = (g_request.len + 1);
-	g_request.msg = (char *)malloc(sizeof(char) * size);
-	if (ix < (size - 1) * 8)
-	{
-		*(g_request.msg) <<= 1;
-		*(g_request.msg) += (signo == SIGUSR2);
-		ix++;
-	}
-	else if (ix >= (size - 1) * 8 && ix < size * 8)
-	{
-		*(g_request.msg) <<= 1;
-		ix++;
-	}
-	else if (ix == size * 8)
+	if (!g_request.msg[0])	
+		g_request.msg = (char *)malloc(sizeof(char) * (g_request.len + 1));
+	*(g_request.msg) <<= 1;
+	*(g_request.msg) += (signo == SIGUSR2);
+	g_request.msg_bc++;
+	if (g_request.msg_bc % 8 == 0)
 	{
 		printf("msg == [%s]\n", g_request.msg);
 		free(g_request.msg);
 		ft_initialize_req();
-		ix = 0;
 	}
 }
 

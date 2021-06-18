@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:46:45 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/17 00:53:01 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/18 13:17:54 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct		s_request
 	pid_t			clipid;
 	unsigned int	len;
 	char 			*msg;
+	int				msg_bc;
 }					t_request;
 
 extern t_request g_request;
