@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:48:12 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/18 13:18:40 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/19 07:11:25 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,47 @@
 
 t_request g_request;
 
-static void ft_receive_header(int signo, siginfo_t *siginfo, void *context)
-{
-	static int ix;
-	
-	if (ix < 32)
-	{
-		if (ix == 0)
-			g_request.clipid = siginfo->si_pid;
-		if (g_request.clipid != 0 && g_request.clipid != siginfo->si_pid)
-			ft_strerr("Error : signal interuption!");
-		g_request.len <<= 1;
-		g_request.len += (signo == SIGUSR2);
-		ix++;
-	}
-	if (ix == 32)
-	{
-		ix = 0;
-		sigaction(SIGUSR2, &phase_read_msg, 0);
-		sigaction(SIGUSR1, &phase_read_msg, 0);
-	}
-}
-
 // void	ft_pingpong_srv()
 static void	ft_initialize_req()
 {
 	g_request.clipid = 0;
 	g_request.len = 0;
+	g_request.len_bc = 0;
 	g_request.msg = NULL;
+	g_request.msg_ix = 0;
 	g_request.msg_bc = 0;
 }
 
+static void ft_receive_header(int signo, siginfo_t *siginfo, void *context)
+{
+	g_request.clipid = siginfo->si_pid;
+	g_request.len <<= (g_request.len_bc != 0);
+	g_request.len += (signo == SIGUSR2);
+	printf("%d", (signo == SIGUSR2));
+	g_request.len_bc++;
+	if (g_request.len_bc == 32)
+	{
+		if (!g_request.msg)	
+			g_request.msg = (char *)malloc(sizeof(char) * (g_request.len + 1));
+		printf("\ng_clipid == [%d]\ng_len == [%d]\n", g_request.clipid, g_request.len);
+		ft_initialize_req();
+		// sigaction(SIGUSR2, &phase_read_msg, 0);
+		// sigaction(SIGUSR1, &phase_read_msg, 0);
+	}
+}
+
+
 static void ft_receive_msg(int signo, siginfo_t *siginfo, void *context)
 {
-	if (!g_request.msg[0])	
-		g_request.msg = (char *)malloc(sizeof(char) * (g_request.len + 1));
-	*(g_request.msg) <<= 1;
-	*(g_request.msg) += (signo == SIGUSR2);
+	g_request.msg[g_request.msg_ix] <<= 1;
+	g_request.msg[g_request.msg_ix] += (signo == SIGUSR2);
 	g_request.msg_bc++;
-	if (g_request.msg_bc % 8 == 0)
+	if (g_request.msg_bc == 8)
+	{
+		g_request.msg_ix++;
+		g_request.msg_bc = 0;
+	}
+	if (g_request.msg_ix == g_request.len)
 	{
 		printf("msg == [%s]\n", g_request.msg);
 		free(g_request.msg);

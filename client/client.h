@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:45:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/16 20:29:43 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/19 06:34:01 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int main(int argc, char **argv);
 
 void ft_accecpt_res(int signo);
 void ft_accecpt_err(int signo);
-void ft_pingpong_signal(pid_t srvpid, int signo);
+void ft_pingpong_cli(pid_t srvpid, int signo);
 
 #endif

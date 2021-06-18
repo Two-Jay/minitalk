@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/17 00:56:22 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/19 07:13:03 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ static int	ft_intbit_send(pid_t srvpid, int data)
 
 	bit_shifter = (sizeof(int) * 8) - 1;
 	bit_mask = (1 << bit_shifter);
-	ix = -1;
-	while (++ix <= bit_shifter)
+	ix = 0;
+	while (ix <= bit_shifter)
 	{
 		usleep(20);
 		if (((data << ix) & bit_mask) == bit_mask)
 			kill(srvpid, SIGUSR2);
 		else
 			kill(srvpid, SIGUSR1);
+		ix++;
 	}
-	usleep(300);
 	return (0);
 }
 
@@ -38,21 +38,24 @@ static int	ft_strbit_send(pid_t srvpid, char *msg)
 	int			bit_mask;
 	int			bit_shifter;
 	int			ix;
+	int			jx;
 	
 	bit_shifter = (sizeof(char) * 8) - 1;
 	bit_mask = (1 << bit_shifter);
-	ix = -1;
-	while (*msg)
+	ix = 0;
+	jx = 0;
+	while (msg[ix])
 	{
-		while (++ix <= bit_shifter)
+		while (jx <= bit_shifter)
 		{
 			usleep(20);
-			if (((*msg << ix) & bit_mask) == bit_mask)
+			if (((*msg << jx) & bit_mask) == bit_mask)
 				kill(srvpid, SIGUSR2);
 			else
 				kill(srvpid, SIGUSR1);
+			jx++;
 		}
-		msg++;
+		ix++;
 	}
 	return (0);
 }
@@ -97,10 +100,6 @@ int main(int argc, char **argv)
 	clipid = getpid();
 	ft_pid_print(clipid, 1);
 	ft_validate_input(argc, argv, &srvpid, &msg_len);
-	// signal(SIGUSR2, &ft_accecpt_res);
-	// signal(SIGUSR1, &ft_accecpt_err);
 	ft_intbit_send(srvpid, msg_len);
-	ft_strbit_send(srvpid, argv[2]);
+// 	ft_strbit_send(srvpid, argv[2]);
 }
-
-

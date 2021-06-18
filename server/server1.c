@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:25:57 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/16 20:41:33 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/19 06:42:15 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ void ft_clear_req_struct(void)
 
 void ft_pingpong_req(int signo, siginfo_t *siginfo)
 {
-	if (siginfo->si_pid != g_request.clipid)
-		kill(siginfo->si_pid, SIGUSR1);
-	else
-		kill(siginfo->si_pid, SIGUSR2);
+	kill(g_request.clipid, SIGUSR2);
 }
 
 int ft_pid_print(int pid, int flag)
