@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:48:12 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/18 13:18:40 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/18 13:43:14 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_initialize_req()
 static void ft_receive_msg(int signo, siginfo_t *siginfo, void *context)
 {
 	if (!g_request.msg[0])	
-		g_request.msg = (char *)malloc(sizeof(char) * (g_request.len + 1));
+		g_request.msg = (char *)ft_calloc(sizeof(char), (g_request.len + 1));
 	*(g_request.msg) <<= 1;
 	*(g_request.msg) += (signo == SIGUSR2);
 	g_request.msg_bc++;
