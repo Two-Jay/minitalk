@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   server1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:25:57 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/19 06:42:15 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/20 05:26:58 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./server.h"
 
 t_request g_request;
-
-void ft_clear_req_struct(void)
-{
-	g_request.len = 0;
-	g_request.msg = NULL;
-}
 
 void ft_pingpong_req(int signo, siginfo_t *siginfo)
 {
