@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:46:45 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/18 13:17:54 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/19 06:52:09 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ typedef struct		s_request
 {
 	pid_t			clipid;
 	unsigned int	len;
+	unsigned int	len_bc;
 	char 			*msg;
+	unsigned int	msg_ix;
 	int				msg_bc;
 }					t_request;
 

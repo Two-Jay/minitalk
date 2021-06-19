@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:48:12 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/18 13:43:14 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/20 02:06:33 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,10 @@
 
 t_request g_request;
 
-static void ft_receive_header(int signo, siginfo_t *siginfo, void *context)
-{
-	static int ix;
-	
-	if (ix < 32)
-	{
-		if (ix == 0)
-			g_request.clipid = siginfo->si_pid;
-		if (g_request.clipid != 0 && g_request.clipid != siginfo->si_pid)
-			ft_strerr("Error : signal interuption!");
-		g_request.len <<= 1;
-		g_request.len += (signo == SIGUSR2);
-		ix++;
-	}
-	if (ix == 32)
-	{
-		ix = 0;
-		sigaction(SIGUSR2, &phase_read_msg, 0);
-		sigaction(SIGUSR1, &phase_read_msg, 0);
-	}
+void ft_clipid_checker(pid_t clipid)
+{	
+	if (g_request.clipid != 0 && g_request.clipid != clipid)
+		kill(clipid, SIGUSR1);
 }
 
 // void	ft_pingpong_srv()
@@ -41,18 +25,45 @@ static void	ft_initialize_req()
 {
 	g_request.clipid = 0;
 	g_request.len = 0;
+	g_request.len_bc = 0;
 	g_request.msg = NULL;
+	g_request.msg_ix = 0;
 	g_request.msg_bc = 0;
+	sigaction(SIGUSR2, &phase_read_header, NULL);
+	sigaction(SIGUSR1, &phase_read_header, NULL);
 }
+
+static void ft_receive_header(int signo, siginfo_t *siginfo, void *context)
+{
+	ft_clipid_checker(siginfo->si_pid);
+	g_request.clipid = siginfo->si_pid;
+	g_request.len <<= (g_request.len_bc != 0);
+	g_request.len += (signo == SIGUSR2);
+	g_request.len_bc++;
+	if (g_request.len_bc == 32)
+	{
+		if (!g_request.msg)	
+			g_request.msg = (char *)ft_calloc(sizeof(char), (g_request.len + 1));
+		printf("\nclient [%d] : ", g_request.clipid);
+		// ft_initialize_req();
+		sigaction(SIGUSR2, &phase_read_msg, NULL);
+		sigaction(SIGUSR1, &phase_read_msg, NULL);
+	}
+}
+
 
 static void ft_receive_msg(int signo, siginfo_t *siginfo, void *context)
 {
-	if (!g_request.msg[0])	
-		g_request.msg = (char *)ft_calloc(sizeof(char), (g_request.len + 1));
-	*(g_request.msg) <<= 1;
-	*(g_request.msg) += (signo == SIGUSR2);
+	ft_clipid_checker(siginfo->si_pid);
+	g_request.msg[g_request.msg_ix] <<= 1;
+	g_request.msg[g_request.msg_ix] += (signo == SIGUSR2);
 	g_request.msg_bc++;
-	if (g_request.msg_bc % 8 == 0)
+	if (g_request.msg_bc == 8)
+	{
+		g_request.msg_ix++;
+		g_request.msg_bc = 0;
+	}
+	if (g_request.msg_ix == g_request.len)
 	{
 		printf("msg == [%s]\n", g_request.msg);
 		free(g_request.msg);
@@ -74,8 +85,8 @@ int main(int argc, char **argv)
 {
 	ft_pid_print(getpid(), 2);
 	ft_sigstruct_init();
-	sigaction(SIGUSR2, &phase_read_header, 0);
-	sigaction(SIGUSR1, &phase_read_header, 0);
+	sigaction(SIGUSR2, &phase_read_header, NULL);
+	sigaction(SIGUSR1, &phase_read_header, NULL);
 	while (1)
 	{
 		pause();
