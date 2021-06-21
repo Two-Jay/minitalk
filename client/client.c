@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/21 17:06:32 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/21 19:03:37 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,19 +99,11 @@ int ft_validate_input(int argc, char **argv)
 
 void ft_receive_ping_len(int signo, siginfo_t *siginfo, void *context)
 {
-	static int tmp = 0;
-
-	tmp++;
-	printf("len_send_count == [%d]\n", tmp);
 	ft_intbit_send(g_request.srvpid, g_request.len);
 }
 
 void ft_receive_ping_str(int signo, siginfo_t *siginfo, void *context)
 {
-	static int tmp = 0;
-
-	tmp++;
-	printf("str_send_count == [%d]\n", tmp);
 	ft_strbit_send(g_request.srvpid, g_request.msg);
 }
 
@@ -151,7 +143,6 @@ void ft_send_connection(void)
 	sleep_checker = 0;
 	while (1)
 	{
-		printf("connection init! [%d]\n", ++tmp);	
 		kill(g_request.srvpid, SIGUSR2);
 		sleep_checker = usleep(1000000);
 		g_request.tc++;
