@@ -6,7 +6,7 @@
 #    By: jekim <arabi1549@naver.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/11 19:25:28 by jekim             #+#    #+#              #
-#    Updated: 2021/06/19 15:08:47 by jekim            ###   ########.fr        #
+#    Updated: 2021/06/21 15:43:52 by jekim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC			=	gcc
 CCFLAG		=	-Wall -Wextra -Werror
 SNTZ		=	-g3 -fsanitize=address
 
-SOURCES		=	server.c server1.c
+SOURCES		=	server.c
 
 HEADERS		=	-I.
 OBJECTS		=	$(SOURCES:.c=.o)

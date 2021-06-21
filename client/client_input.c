@@ -1,29 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client1.c                                          :+:      :+:    :+:   */
+/*   client_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:15:40 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/19 15:05:12 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/21 15:43:51 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./client.h"
-
-void ft_accecpt_res(int signo)
-{
-    return ;
-}
-
-void ft_accecpt_err(int signo)
-{
-    ft_strerr("Error : invalid response");
-}
-
-void ft_pingpong_cli(pid_t srvpid, int signo)
-{
-	kill(srvpid, signo);
-	pause();
-}

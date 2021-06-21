@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
+/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:46:45 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/19 06:52:09 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/20 19:07:27 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define _XOPEN_SOURCE 500
 
-
+struct sigaction phase_read_connection;
 struct sigaction phase_read_header;
 struct sigaction phase_read_msg;
 
@@ -36,7 +36,8 @@ typedef struct		s_request
 	unsigned int	len_bc;
 	char 			*msg;
 	unsigned int	msg_ix;
-	int				msg_bc;
+	unsigned int	msg_bc;
+	unsigned int	srv_state;
 }					t_request;
 
 extern t_request g_request;

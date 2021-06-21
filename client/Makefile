@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jekim <arabi1549@naver.com>                +#+  +:+       +#+         #
+#    By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/11 19:21:52 by jekim             #+#    #+#              #
-#    Updated: 2021/06/16 20:16:32 by jekim            ###   ########.fr        #
+#    Updated: 2021/06/20 06:13:35 by jekim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC			=	gcc
 CCFLAG		=	-Wall -Wextra -Werror
 SNTZ		=	-g3 -fsanitize=address
 
-SOURCES		=	client.c client1.c
+SOURCES		=	client.c
 
 HEADERS		=	-I.
 OBJECTS		=	$(SOURCES:.c=.o)
