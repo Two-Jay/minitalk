@@ -6,23 +6,13 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/20 07:52:39 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/21 14:14:07 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./client.h"
 
 t_request g_request;
-
-void ft_accecpt_res(int signo)
-{
-	write(1, "1", 1);
-}
-
-void ft_accecpt_err(int signo)
-{
-	write(1, "0", 1);
-}
 
 void	ft_bitsend(pid_t srvpid, int data, int data_size, int *idx)
 {
@@ -100,6 +90,8 @@ int ft_validate_input(int argc, char **argv)
 	g_request.srvpid = (pid_t)ft_atoi(argv[1]);
 	g_request.clipid = getpid();
 	g_request.msg = argv[2];
+	g_request.tc = 0;
+	g_request.connection = 0;
 	if (g_request.srvpid < 0)
 		ft_strerr("Error : invalid server pid");
 	return (0);
@@ -110,7 +102,7 @@ void ft_receive_ping_len(int signo, siginfo_t *siginfo, void *context)
 	static int tmp = 0;
 
 	tmp++;
-	printf("count == [%d]\n", tmp);
+	printf("len_send_count == [%d]\n", tmp);
 	ft_intbit_send(g_request.srvpid, g_request.len);
 }
 
@@ -119,18 +111,59 @@ void ft_receive_ping_str(int signo, siginfo_t *siginfo, void *context)
 	static int tmp = 0;
 
 	tmp++;
-	printf("count == [%d]\n", tmp);
+	printf("str_send_count == [%d]\n", tmp);
 	ft_strbit_send(g_request.srvpid, g_request.msg);
+}
+
+void ft_receive_ping_cnt(int signo, siginfo_t *siginfo, void *context)
+{
+	if (signo == SIGUSR1)
+		;
+	if (signo == SIGUSR2)
+	{
+		sigaction(SIGUSR2, &phase_send_msglen, NULL);
+		sigaction(SIGUSR1, &phase_send_msglen, NULL);
+		ft_intbit_send(g_request.srvpid, g_request.len);
+	}
 }
 
 void ft_sigstruct_init(void)
 {
+	phase_send_connection.sa_sigaction = ft_receive_ping_cnt;
 	phase_send_msglen.sa_sigaction = ft_receive_ping_len;
 	phase_send_msgchar.sa_sigaction = ft_receive_ping_str;
+	sigemptyset(&phase_send_connection.sa_mask);
 	sigemptyset(&phase_send_msglen.sa_mask);
 	sigemptyset(&phase_send_msgchar.sa_mask);
+	phase_send_connection.sa_flags = SA_SIGINFO;
 	phase_send_msglen.sa_flags = SA_SIGINFO;
 	phase_send_msgchar.sa_flags = SA_SIGINFO;
+}
+
+
+// tc break ok
+// but didn't send len_bit after send 1 len bit 
+void ft_send_connection(void)
+{
+	static int tmp = 0;
+	int sleep_checker;
+
+	sleep_checker = 0;
+	while (1)
+	{
+		printf("connection init! [%d]\n", ++tmp);	
+		kill(g_request.srvpid, SIGUSR2);
+		sleep_checker = usleep(1000000);
+		g_request.tc++;
+		if (sleep_checker != 0 || g_request.tc == 31)
+		{
+			if (g_request.tc < 31)
+				g_request.connection++;
+			break;
+		}
+	}
+	if (g_request.tc == 61)
+		ft_strerr("Error : the Server didn't receive client's request");
 }
 
 int main(int argc, char **argv)
@@ -138,12 +171,8 @@ int main(int argc, char **argv)
 	ft_validate_input(argc, argv);
 	ft_pid_print(g_request.clipid, 1);
 	ft_sigstruct_init();
-	sigaction(SIGUSR2, &phase_send_msglen, NULL);
-	sigaction(SIGUSR1, &phase_send_msglen, NULL);
-	ft_intbit_send(g_request.srvpid, g_request.len);
-	while (1)
-	{
-		pause();
-	}
+	sigaction(SIGUSR2, &phase_send_connection, NULL);
+	sigaction(SIGUSR1, &phase_send_connection, NULL);
+	ft_send_connection();
 	return (0);
 }

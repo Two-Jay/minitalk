@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:45:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/20 07:33:48 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/20 20:59:41 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <signal.h>
 #include "../libft/libft.h"
 
+struct sigaction phase_send_connection;
 struct sigaction phase_send_msglen;
 struct sigaction phase_send_msgchar;
 
@@ -28,6 +29,8 @@ typedef struct		s_request
 	pid_t			srvpid;
 	unsigned int	len;
 	char 			*msg;
+	unsigned int	tc;
+	unsigned int	connection;
 }					t_request;
 
 extern t_request g_request;
