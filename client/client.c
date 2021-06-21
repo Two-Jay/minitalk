@@ -6,7 +6,7 @@
 /*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/21 14:14:07 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/21 17:06:32 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,5 +174,9 @@ int main(int argc, char **argv)
 	sigaction(SIGUSR2, &phase_send_connection, NULL);
 	sigaction(SIGUSR1, &phase_send_connection, NULL);
 	ft_send_connection();
+	while(1)
+	{
+		pause();
+	}
 	return (0);
 }
