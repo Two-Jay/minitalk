@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:48:12 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/21 15:43:47 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/21 18:50:28 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ void ft_pingpong_req(int clipid, siginfo_t *siginfo)
 
 void ft_pingpong_wait(int clipid, siginfo_t *siginfo)
 {
-	static int tmp;
-
-	printf("wait received [%d]", ++tmp);
 	kill(clipid, SIGUSR1);
 }
 
@@ -53,7 +50,6 @@ static void	ft_initialize_req()
 	g_request.msg = NULL;
 	g_request.msg_ix = 0;
 	g_request.msg_bc = 0;
-	g_request.srv_state = 0;
 	sigaction(SIGUSR2, &phase_read_header, NULL);
 	sigaction(SIGUSR1, &phase_read_header, NULL);
 }
@@ -64,9 +60,7 @@ static void ft_receive_header(int signo, siginfo_t *siginfo, void *context)
 
 	g_request.len <<= 1;
 	g_request.len += (signo == SIGUSR2);
-	printf("Received sig == [%d]\n", g_request.len_bc);
 	g_request.len_bc++;
-	// ft_pingpong_req(signo, siginfo);
 	if (g_request.len_bc == 32)
 	{
 		if (!g_request.msg)	
@@ -74,7 +68,6 @@ static void ft_receive_header(int signo, siginfo_t *siginfo, void *context)
 		sigaction(SIGUSR2, &phase_read_msg, NULL);
 		sigaction(SIGUSR1, &phase_read_msg, NULL);
 	}
-	// printf("msg receiver check!\n");
 	ft_pingpong_req(g_request.clipid, siginfo);
 }
 
@@ -87,7 +80,6 @@ static void ft_receive_msg(int signo, siginfo_t *siginfo, void *context)
 	g_request.msg[g_request.msg_ix] <<= 1;
 	g_request.msg[g_request.msg_ix] += (signo == SIGUSR2);
 	g_request.msg_bc++;
-	// ft_pingpong_req(signo, siginfo);
 	if (g_request.msg_bc == 8)
 	{
 		g_request.msg_ix++;
@@ -95,13 +87,11 @@ static void ft_receive_msg(int signo, siginfo_t *siginfo, void *context)
 	}
 	if (g_request.msg_ix == g_request.len)
 	{
-		// printf("\nReceived length == [%d]\n", g_request.len);
 		ft_pid_print(g_request.clipid, 1);
 		write(1, g_request.msg, g_request.len);
 		write(1, "\n", 1);
 		free(g_request.msg);
 		ft_initialize_req();
-		system("leaks server");
 	}
 	ft_pingpong_req(tmp, siginfo);
 }
@@ -109,20 +99,15 @@ static void ft_receive_msg(int signo, siginfo_t *siginfo, void *context)
 
 void ft_receive_connection(int signo, siginfo_t *siginfo, void *context)
 {
-
 	if (g_request.clipid == 0)
 	{
 		g_request.clipid = siginfo->si_pid;
 		sigaction(SIGUSR2, &phase_read_header, NULL);
 		sigaction(SIGUSR1, &phase_read_header, NULL);
-		printf("connection init!\n");
 		ft_pingpong_req(g_request.clipid, siginfo);
 	}
-	else if (g_request.clipid && g_request.srv_state)
-	{
-		printf("connection fail!\n");
+	else if (g_request.clipid)
 		ft_pingpong_wait(g_request.clipid, siginfo);
-	}
 	else
 		;
 }

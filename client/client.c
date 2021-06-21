@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/21 15:43:49 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/21 18:48:16 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,6 @@
 
 t_request g_request;
 
-void	ft_bitsend(pid_t srvpid, int data, int data_size, int *idx)
-{
-	int			bit_mask;
-
-	bit_mask = (1 << ((data_size * 8) - 1));
-	if (((data << *idx) & bit_mask) == bit_mask)
-	{
-		(*idx)++;
-		kill(srvpid, SIGUSR2);
-	}
-	else
-	{
-		(*idx)++;
-		kill(srvpid, SIGUSR1);
-	}
-}
-
-static int	ft_strbit_send(pid_t srvpid, char *msg)
-{
-	static int	ix;
-	static int	jx;
-	
-	if (ix == g_request.len)
-		exit(0);
-	ft_bitsend(srvpid, msg[ix], sizeof(char), &jx);
-	if (jx == 8)
-	{
-		ix++;
-		jx = 0;
-	}
-	return (0);
-}
-
-static int	ft_intbit_send(pid_t srvpid, int data)
-{
-	static int	ix;
-
-	if (ix < 32)
-		ft_bitsend(srvpid, data, sizeof(int), &ix);
-	else if (ix == 32)
-	{
-		sigaction(SIGUSR2, &phase_send_msgchar, NULL);
-		sigaction(SIGUSR1, &phase_send_msgchar, NULL);
-		ft_strbit_send(srvpid, g_request.msg);
-	}
-	return (0);
-}
 
 int ft_pid_print(int pid, int flag)
 {
@@ -97,6 +50,38 @@ int ft_validate_input(int argc, char **argv)
 	return (0);
 }
 
+void	ft_bitsend(pid_t srvpid, int data, int data_size, int *idx)
+{
+	int			bit_mask;
+
+	bit_mask = (1 << ((data_size * 8) - 1));
+	if (((data << *idx) & bit_mask) == bit_mask)
+	{
+		(*idx)++;
+		kill(srvpid, SIGUSR2);
+	}
+	else
+	{
+		(*idx)++;
+		kill(srvpid, SIGUSR1);
+	}
+}
+
+static int	ft_intbit_send(pid_t srvpid, int data)
+{
+	static int	ix;
+
+	if (ix < 32)
+		ft_bitsend(srvpid, data, sizeof(int), &ix);
+	else if (ix == 32)
+	{
+		sigaction(SIGUSR2, &phase_send_msgchar, NULL);
+		sigaction(SIGUSR1, &phase_send_msgchar, NULL);
+		ft_strbit_send(srvpid, g_request.msg);
+	}
+	return (0);
+}
+
 void ft_receive_ping_len(int signo, siginfo_t *siginfo, void *context)
 {
 	static int tmp = 0;
@@ -104,6 +89,22 @@ void ft_receive_ping_len(int signo, siginfo_t *siginfo, void *context)
 	tmp++;
 	printf("len_send_count == [%d]\n", tmp);
 	ft_intbit_send(g_request.srvpid, g_request.len);
+}
+
+static int	ft_strbit_send(pid_t srvpid, char *msg)
+{
+	static int	ix;
+	static int	jx;
+	
+	if (ix == g_request.len)
+		exit(0);
+	ft_bitsend(srvpid, msg[ix], sizeof(char), &jx);
+	if (jx == 8)
+	{
+		ix++;
+		jx = 0;
+	}
+	return (0);
 }
 
 void ft_receive_ping_str(int signo, siginfo_t *siginfo, void *context)
@@ -153,16 +154,14 @@ void ft_send_connection(void)
 	{
 		printf("connection init! [%d]\n", ++tmp);	
 		kill(g_request.srvpid, SIGUSR2);
-		sleep_checker = usleep(1000000);
+		sleep_checker = usleep(500000);
 		g_request.tc++;
 		if (sleep_checker != 0 || g_request.tc == 31)
 		{
-			if (g_request.tc < 31)
-				g_request.connection++;
 			break;
 		}
 	}
-	if (g_request.tc == 61)
+	if (g_request.tc == 31)
 		ft_strerr("Error : the Server didn't receive client's request");
 }
 
@@ -174,5 +173,9 @@ int main(int argc, char **argv)
 	sigaction(SIGUSR2, &phase_send_connection, NULL);
 	sigaction(SIGUSR1, &phase_send_connection, NULL);
 	ft_send_connection();
+	while(1)
+	{
+		pause();
+	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:45:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/20 20:59:41 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/21 18:48:05 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct		s_request
 	unsigned int	len;
 	char 			*msg;
 	unsigned int	tc;
-	unsigned int	connection;
 }					t_request;
 
 extern t_request g_request;

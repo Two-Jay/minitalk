@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:46:45 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/20 19:07:27 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/21 18:47:17 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct		s_request
 	char 			*msg;
 	unsigned int	msg_ix;
 	unsigned int	msg_bc;
-	unsigned int	srv_state;
 }					t_request;
 
 extern t_request g_request;
