@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:48:12 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/19 13:56:45 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/19 15:10:14 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void ft_receive_header(int signo, siginfo_t *siginfo, void *context)
 	g_request.len <<= (g_request.len_bc != 0);
 	g_request.len += (signo == SIGUSR2);
 	g_request.len_bc++;
+	// ft_pingpong_req(signo, siginfo);
 	if (g_request.len_bc == 32)
 	{
 		if (!g_request.msg)	
@@ -50,6 +51,7 @@ static void ft_receive_msg(int signo, siginfo_t *siginfo, void *context)
 	g_request.msg[g_request.msg_ix] <<= 1;
 	g_request.msg[g_request.msg_ix] += (signo == SIGUSR2);
 	g_request.msg_bc++;
+	// ft_pingpong_req(signo, siginfo);
 	if (g_request.msg_bc == 8)
 	{
 		g_request.msg_ix++;
@@ -57,9 +59,10 @@ static void ft_receive_msg(int signo, siginfo_t *siginfo, void *context)
 	}
 	if (g_request.msg_ix == g_request.len)
 	{
-		printf("msg == [%s]\n", g_request.msg);
+		printf("%s\n", g_request.msg);
 		free(g_request.msg);
 		ft_initialize_req();
+		system("leaks server");
 	}
 }
 
@@ -83,5 +86,5 @@ int main(int argc, char **argv)
 	{
 		pause();
 	}
-	return (0);	
+	return (0);
 }

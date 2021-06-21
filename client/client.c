@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/19 13:55:08 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/19 15:10:04 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ static int	ft_intbit_send(pid_t srvpid, int data)
 	ix = 0;
 	while (ix <= bit_shifter)
 	{
-		usleep(40);
 		if (((data << ix) & bit_mask) == bit_mask)
 			kill(srvpid, SIGUSR2);
 		else
 			kill(srvpid, SIGUSR1);
 		ix++;
 	}
-	usleep(200);
 	return (0);
 }
 
@@ -50,14 +48,12 @@ static int	ft_strbit_send(pid_t srvpid, char *msg)
 		jx = 0;
 		while (jx <= bit_shifter)
 		{
-			usleep(200);
 			if (((msg[ix] << jx) & bit_mask) == bit_mask)
 				kill(srvpid, SIGUSR2);
 			else
 				kill(srvpid, SIGUSR1);
 			jx++;
 		}
-		printf("\n");
 		ix++;
 	}
 	return (0);
@@ -103,6 +99,8 @@ int main(int argc, char **argv)
 	clipid = getpid();
 	ft_pid_print(clipid, 1);
 	ft_validate_input(argc, argv, &srvpid, &msg_len);
+	signal(SIGUSR2, &ft_accecpt_res);
+	signal(SIGUSR1, &ft_accecpt_err);
 	ft_intbit_send(srvpid, msg_len);
 	ft_strbit_send(srvpid, argv[2]);
 }

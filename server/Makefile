@@ -6,7 +6,7 @@
 #    By: jekim <arabi1549@naver.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/11 19:25:28 by jekim             #+#    #+#              #
-#    Updated: 2021/06/16 20:30:51 by jekim            ###   ########.fr        #
+#    Updated: 2021/06/19 15:08:47 by jekim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIBFLAG		=	 -lft -L$(LIBPATH)
 all			:	$(NAME)
 
 $(NAME)		:	$(OBJECTS)
-	$(CC) $(CCFLAG) $(LIBFLAG) $(SNTZ) $(HEADERS) $(OBJECTS) -o $(NAME)
+	$(CC) $(CCFLAG) $(LIBFLAG) $(HEADERS) $(OBJECTS) -o $(NAME)
 	@echo "\033[0;92m* $(NAME) program file was created *\033[0m"
 
 clean		:
