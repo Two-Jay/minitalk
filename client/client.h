@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:45:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/21 22:27:08 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/22 17:36:29 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct		s_request
 	pid_t			srvpid;
 	unsigned int	len;
 	char			*msg;
-	unsigned int	tc;
 }					t_request;
 
 extern t_request	g_request;

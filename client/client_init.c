@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:59:40 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/21 22:21:32 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/22 17:37:20 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,17 @@ int		ft_pid_print(int pid, int flag)
 int		ft_validate_input(int argc, char **argv)
 {
 	if (argc != 3)
-		ft_strerr("Usage : ./client [server_pid] [message]");
+		ft_strerr("Usage\n: ./client [server_pid] [message]");
 	if (!(argv[2]))
-		ft_strerr("Error : invalid message");
-	g_request.len = ft_strlen(argv[2]);
+		ft_strerr("Error\n : invalid message");
 	g_request.srvpid = (pid_t)ft_atoi(argv[1]);
+	if (g_request.srvpid < 99)
+		ft_strerr("Error\n : invalid server pid");
+	g_request.len = ft_strlen(argv[2]);
+	if (g_request.len <= 0)
+		ft_strerr("Error\n : invalid message");
 	g_request.clipid = getpid();
 	g_request.msg = argv[2];
-	g_request.tc = 0;
-	if (g_request.srvpid < 0)
-		ft_strerr("Error : invalid server pid");
 	return (0);
 }
 

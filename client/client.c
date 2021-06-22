@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/21 22:09:34 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/22 17:38:42 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ t_request g_request;
 void	ft_receive_ping_cnt(int signo, siginfo_t *siginfo, void *context)
 {
 	if (signo == SIGUSR1)
-		;
+	{
+		ft_send_connection();
+	}
 	if (signo == SIGUSR2)
 	{
 		sigaction(SIGUSR2, &phase_send_msglen, NULL);
@@ -29,20 +31,22 @@ void	ft_receive_ping_cnt(int signo, siginfo_t *siginfo, void *context)
 void	ft_send_connection(void)
 {
 	int			sleep_checker;
+	static int	tc;
 
 	sleep_checker = 0;
+	tc = 0;
 	while (1)
 	{
 		kill(g_request.srvpid, SIGUSR2);
-		sleep_checker = usleep(500000);
-		g_request.tc++;
-		if (sleep_checker != 0 || g_request.tc == 31)
+		sleep_checker = usleep(1000000);
+		tc++;
+		if (sleep_checker != 0 || tc == 31)
 		{
 			break ;
 		}
 	}
-	if (g_request.tc == 31)
-		ft_strerr("Error : the Server didn't receive client's request");
+	if (tc == 31)
+		ft_strerr("Error\n: the Server didn't receive client's request");
 }
 
 int		main(int argc, char **argv)
