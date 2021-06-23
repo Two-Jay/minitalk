@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 04:17:12 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/16 15:56:12 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/23 20:11:47 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 typedef struct		s_list
 {
 	void			*content;
-	struct	s_list	*next;
+	struct s_list	*next;
 }					t_list;
 
 /*
