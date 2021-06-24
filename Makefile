@@ -6,7 +6,7 @@
 #    By: jekim <arabi1549@naver.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/16 15:55:52 by jekim             #+#    #+#              #
-#    Updated: 2021/06/16 19:37:25 by jekim            ###   ########.fr        #
+#    Updated: 2021/06/24 20:45:39 by jekim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,12 @@ all			:
 		@$(MAKE) -C	$(CLIDIR)
 		@$(MAKE) -C	$(SRVDIR)
 		@echo "\033[0;94m*----- $(NAME) was compiled -----*\033[0m"
+
+bonus		:
+		@$(MAKE) -C $(LIBFTDIR)
+		@$(MAKE) -C	$(CLIDIR) bonus
+		@$(MAKE) -C	$(SRVDIR) bonus
+		@echo "\033[0;94m*----- $(NAME)_bonus was compiled -----*\033[0m"
 
 clean		:
 		@$(MAKE) -C $(LIBFTDIR) clean
