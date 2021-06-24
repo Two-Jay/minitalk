@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:46:45 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/21 22:30:20 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/24 19:22:33 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define _XOPEN_SOURCE 500
 
 struct sigaction	phase_read_connection;
-struct sigaction	phase_read_header;
+struct sigaction	phase_read_msglen;
 struct sigaction	phase_read_msg;
 
 typedef struct		s_request

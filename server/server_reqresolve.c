@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 22:13:33 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/22 17:22:25 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/24 19:23:19 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	ft_receive_connection(int signo, siginfo_t *siginfo, void *context)
 	if (g_request.clipid == 0)
 	{
 		g_request.clipid = siginfo->si_pid;
-		sigaction(SIGUSR2, &phase_read_header, NULL);
-		sigaction(SIGUSR1, &phase_read_header, NULL);
+		sigaction(SIGUSR2, &phase_read_msglen, NULL);
+		sigaction(SIGUSR1, &phase_read_msglen, NULL);
 		ft_pingpong_req(g_request.clipid, siginfo);
 	}
 	else if (g_request.clipid)

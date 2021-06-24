@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:48:12 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/22 17:26:12 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/24 19:23:06 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ t_request g_request;
 void	ft_sigstruct_init(void)
 {
 	phase_read_connection.sa_sigaction = ft_receive_connection;
-	phase_read_header.sa_sigaction = ft_receive_header;
+	phase_read_msglen.sa_sigaction = ft_receive_header;
 	phase_read_msg.sa_sigaction = ft_receive_msg;
 	sigemptyset(&phase_read_connection.sa_mask);
-	sigemptyset(&phase_read_header.sa_mask);
+	sigemptyset(&phase_read_msglen.sa_mask);
 	sigemptyset(&phase_read_msg.sa_mask);
 	phase_read_connection.sa_flags = SA_SIGINFO;
-	phase_read_header.sa_flags = SA_SIGINFO;
+	phase_read_msglen.sa_flags = SA_SIGINFO;
 	phase_read_msg.sa_flags = SA_SIGINFO;
 }
 

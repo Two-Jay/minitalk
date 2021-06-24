@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:15:40 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/21 22:21:29 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/24 19:23:47 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int		ft_intbit_send(pid_t srvpid, int data)
 		ft_bitsend(srvpid, data, sizeof(int), &ix);
 	else if (ix == 32)
 	{
-		sigaction(SIGUSR2, &phase_send_msgchar, NULL);
-		sigaction(SIGUSR1, &phase_send_msgchar, NULL);
+		sigaction(SIGUSR2, &phase_send_msg, NULL);
+		sigaction(SIGUSR1, &phase_send_msg, NULL);
 		ft_strbit_send(srvpid, g_request.msg);
 	}
 	return (0);

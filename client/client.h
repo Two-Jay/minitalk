@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:45:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/22 17:36:29 by jekim            ###   ########.fr       */
+/*   Updated: 2021/06/24 19:22:40 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 struct sigaction	phase_send_connection;
 struct sigaction	phase_send_msglen;
-struct sigaction	phase_send_msgchar;
+struct sigaction	phase_send_msg;
 
 typedef struct		s_request
 {
