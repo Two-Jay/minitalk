@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:48:12 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/24 19:44:38 by jekim            ###   ########.fr       */
+/*   Updated: 2021/07/18 14:19:18 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_initialize_req(void)
 	sigaction(SIGUSR1, &phase_read_connection, NULL);
 }
 
-int		main(int argc, char **argv)
+int		main(void)
 {
 	ft_pid_print(getpid(), 2);
 	ft_sigstruct_init();

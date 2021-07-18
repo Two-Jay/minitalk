@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:15:40 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/24 19:23:47 by jekim            ###   ########.fr       */
+/*   Updated: 2021/07/18 14:07:50 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ int		ft_strbit_send(pid_t srvpid, char *msg)
 
 void	ft_receive_ping_str(int signo, siginfo_t *siginfo, void *context)
 {
+	(void)signo;
+	(void)siginfo;
+	(void)context;
 	ft_strbit_send(g_request.srvpid, g_request.msg);
 }
 
@@ -69,5 +72,8 @@ int		ft_intbit_send(pid_t srvpid, int data)
 
 void	ft_receive_ping_len(int signo, siginfo_t *siginfo, void *context)
 {
+	(void)signo;
+	(void)siginfo;
+	(void)context;
 	ft_intbit_send(g_request.srvpid, g_request.len);
 }

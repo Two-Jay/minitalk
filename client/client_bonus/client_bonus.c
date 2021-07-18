@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/24 19:33:34 by jekim            ###   ########.fr       */
+/*   Updated: 2021/07/18 14:21:14 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ t_request g_request;
 
 void	ft_receive_ping_cnt(int signo, siginfo_t *siginfo, void *context)
 {
+	(void)siginfo;
+	(void)context;
 	if (signo == SIGUSR1)
 	{
 		ft_send_connection();

@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:46:45 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/24 20:51:26 by jekim            ###   ########.fr       */
+/*   Updated: 2021/07/18 14:21:53 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void				ft_sigstruct_init(void);
 int					ft_pid_print(int pid, int flag);
 void				ft_initialize_req(void);
 
-void				ft_pingpong_req(int clipid, siginfo_t *siginfo);
-void				ft_pingpong_wait(int clipid, siginfo_t *siginfo);
+void				ft_pingpong_req(int clipid);
+void				ft_pingpong_wait(int clipid);
 void				ft_receive_header(int signo, siginfo_t *siginfo,
 							void *context);
 void				ft_receive_msg(int signo, siginfo_t *siginfo,

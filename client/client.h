@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:45:55 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/24 19:22:40 by jekim            ###   ########.fr       */
+/*   Updated: 2021/07/18 14:09:08 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct		s_request
 {
 	pid_t			clipid;
 	pid_t			srvpid;
-	unsigned int	len;
+	int	len;
 	char			*msg;
 }					t_request;
 
@@ -35,8 +35,7 @@ extern t_request	g_request;
 
 int					main(int argc, char **argv);
 void				ft_send_connection(void);
-void				ft_receive_ping_cnt(int signo, siginfo_t *siginfo,
-								void *context);
+void				ft_receive_ping_cnt(int signo, siginfo_t *siginfo, void *context);
 
 int					ft_pid_print(int pid, int flag);
 void				ft_sigstruct_init(void);
