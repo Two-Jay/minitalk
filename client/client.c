@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:42:20 by jekim             #+#    #+#             */
-/*   Updated: 2021/09/28 16:20:05 by jekim            ###   ########.fr       */
+/*   Updated: 2021/09/28 17:43:00 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_send_connection(void)
 	while (1)
 	{
 		kill(g_request.srvpid, SIGUSR2);
-		sleep_checker = usleep(1000000);
+		sleep_checker = usleep(1000000); // 시간 만큼 다 쉬면 0 리턴 , 그렇지 못하면 임의 정수 리턴
 		tc++;
 		if (sleep_checker != 0 || tc == 31)
 		{
@@ -53,9 +53,13 @@ void	ft_send_connection(void)
 
 int	main(int argc, char **argv)
 {
+	// validation - 들어온 인자 검증
 	ft_validate_input(argc, argv);
+	// client pid 출력
 	ft_pid_print(g_request.clipid, 1);
+	// sigaction 구조체 initiation
 	ft_sigstruct_init();
+	// connection sigaction 사용
 	sigaction(SIGUSR2, &g_request.phase_send_connection, NULL);
 	sigaction(SIGUSR1, &g_request.phase_send_connection, NULL);
 	ft_send_connection();

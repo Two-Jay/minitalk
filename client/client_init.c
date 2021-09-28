@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:59:40 by jekim             #+#    #+#             */
-/*   Updated: 2021/09/28 16:25:59 by jekim            ###   ########.fr       */
+/*   Updated: 2021/09/28 17:46:46 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,4 @@ void	ft_sigstruct_init(void)
 	g_request.phase_send_msglen.sa_flags = SA_SIGINFO;
 	g_request.phase_send_msg.sa_flags = SA_SIGINFO;
 }
+

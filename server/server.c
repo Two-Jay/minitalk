@@ -6,7 +6,7 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 04:48:12 by jekim             #+#    #+#             */
-/*   Updated: 2021/09/28 16:33:36 by jekim            ###   ########.fr       */
+/*   Updated: 2021/09/28 17:51:46 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,11 @@ void	ft_initialize_req(void)
 
 int	main(void)
 {
+	// server pid 출력
 	ft_pid_print(getpid(), 2);
+	// sigaction 구조체 초기화
 	ft_sigstruct_init();
+	// 커넥션 sigaction 사용
 	sigaction(SIGUSR2, &g_request.phase_read_connection, NULL);
 	sigaction(SIGUSR1, &g_request.phase_read_connection, NULL);
 	while (1)
