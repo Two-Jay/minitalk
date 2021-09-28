@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_intlen.c                                        :+:      :+:    :+:   */
+/*   ft_isoverflow.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/10 20:47:47 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/23 20:11:00 by jekim            ###   ########.fr       */
+/*   Created: 2021/07/08 01:12:55 by jekim             #+#    #+#             */
+/*   Updated: 2021/07/28 03:58:53 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./libft.h"
 
-int	ft_intlen(int nbr, int base)
+int	ft_isoverflow(long long nbr)
 {
-	int len;
+	long long	max;
+	long long	min;
 
-	len = 0;
-	if (nbr < 0)
-	{
-		nbr = nbr * -1;
-		len++;
-	}
-	while (nbr > 0)
-	{
-		nbr = nbr / base;
-		len++;
-	}
-	return (len);
+	max = 2147483647;
+	min = -2147483648;
+	if (nbr > max)
+		return (1);
+	if (nbr < min)
+		return (-1);
+	else
+		return (0);
 }

@@ -6,7 +6,7 @@
 #    By: jekim <arabi1549@naver.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/11 19:25:28 by jekim             #+#    #+#              #
-#    Updated: 2021/07/18 13:56:43 by jekim            ###   ########seoul.kr   #
+#    Updated: 2021/09/28 16:43:36 by jekim            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,21 +39,21 @@ endif
 all			:	$(NAME)
 
 $(NAME)		:	$(OBJECTS)
-		$(CC) $(CCFLAG) $(LIBFLAG) $(HEADERS) $(OBJECTS) -o $(NAME)
+		@$(CC) $(CCFLAG) $(LIBFLAG) $(HEADERS) $(OBJECTS) -o $(NAME)
 		@echo "\033[0;92m* $(NAME) program file was created *\033[0m"
 
 %.o : %.c
-		$(CC) $(CCFLAG) $(INCLUDE) $< -c -o $@
+		@$(CC) $(CCFLAG) $(INCLUDE) $< -c -o $@
 
 bonus		:
 		@make WITH_BONUS=1 all
 
 clean		:
-		rm -rf $(OBJ) $(BOBJ)
+		@rm -rf $(OBJ) $(BOBJ)
 		@echo "\033[0;91m* $(NAME) object files was deleted *\033[0m"
 
 fclean		:	clean
-		rm -rf $(NAME)
+		@rm -rf $(NAME)
 		@echo "\033[0;91m* $(NAME) was deleted* \033[0m"
 
 re			:	fclean all

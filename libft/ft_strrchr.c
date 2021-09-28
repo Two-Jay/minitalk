@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 19:25:59 by jekim             #+#    #+#             */
-/*   Updated: 2021/01/11 02:02:59 by jseo             ###   ########.fr       */
+/*   Updated: 2021/07/28 03:01:59 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strrchr(const char *src, int c)
 {
-	unsigned int src_l;
+	unsigned int	src_l;
 
 	if (!src)
 		return (NULL);

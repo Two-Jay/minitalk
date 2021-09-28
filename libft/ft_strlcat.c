@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 20:03:42 by jekim             #+#    #+#             */
-/*   Updated: 2021/01/11 14:53:37 by jseo             ###   ########.fr       */
+/*   Updated: 2021/07/28 03:00:55 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t n)
 {
-	size_t dst_l;
-	size_t src_l;
-	size_t ix;
+	size_t	dst_l;
+	size_t	src_l;
+	size_t	ix;
 
 	if (!src || !dst)
 		return (0);

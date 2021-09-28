@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 23:40:43 by jekim             #+#    #+#             */
-/*   Updated: 2021/01/11 02:03:17 by jseo             ###   ########.fr       */
+/*   Updated: 2021/07/28 02:51:02 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	*ft_memchr(const void *src, int c, size_t n)
 {
-	unsigned char *s;
-	unsigned char find;
+	unsigned char	*s;
+	unsigned char	find;
 
 	if (!src)
 		return (NULL);

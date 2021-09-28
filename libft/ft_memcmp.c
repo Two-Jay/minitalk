@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 23:31:23 by jekim             #+#    #+#             */
-/*   Updated: 2021/01/11 18:18:16 by jseo             ###   ########.fr       */
+/*   Updated: 2021/07/28 04:38:26 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ int	ft_memcmp(const void *ptr1, const void *ptr2, size_t n)
 		s1++;
 		s2++;
 	}
-	return (n == 0 ? 0 : *s1 - *s2);
+	if (n == 0)
+		return (0);
+	return (*s1 - *s2);
 }

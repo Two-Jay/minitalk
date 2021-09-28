@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 01:00:34 by jekim             #+#    #+#             */
-/*   Updated: 2021/01/11 16:13:56 by jseo             ###   ########.fr       */
+/*   Updated: 2021/07/28 02:49:05 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_bzero(void *dst, size_t n)
 {
-	unsigned char *temp;
+	unsigned char	*temp;
 
 	if (!dst)
 		return ;

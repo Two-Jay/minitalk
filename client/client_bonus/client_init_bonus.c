@@ -6,17 +6,17 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 21:59:40 by jekim             #+#    #+#             */
-/*   Updated: 2021/07/18 14:21:13 by jekim            ###   ########seoul.kr  */
+/*   Updated: 2021/09/28 16:27:33 by jekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./client_bonus.h"
 
-t_request g_request;
+t_request	g_request;
 
-int		ft_pid_print(int pid, int flag)
+int	ft_pid_print(int pid, int flag)
 {
-	char *buf;
+	char	*buf;
 
 	buf = ft_itoa(pid);
 	if (!buf)
@@ -32,7 +32,7 @@ int		ft_pid_print(int pid, int flag)
 	return (0);
 }
 
-int		ft_validate_input(int argc, char **argv)
+int	ft_validate_input(int argc, char **argv)
 {
 	if (argc != 3)
 		ft_strerr("Usage\n: ./client [server_pid] [message]");
@@ -51,13 +51,13 @@ int		ft_validate_input(int argc, char **argv)
 
 void	ft_sigstruct_init(void)
 {
-	phase_send_connection.sa_sigaction = ft_receive_ping_cnt;
-	phase_send_msglen.sa_sigaction = ft_receive_ping_len;
-	phase_send_msg.sa_sigaction = ft_receive_ping_str;
-	sigemptyset(&phase_send_connection.sa_mask);
-	sigemptyset(&phase_send_msglen.sa_mask);
-	sigemptyset(&phase_send_msg.sa_mask);
-	phase_send_connection.sa_flags = SA_SIGINFO;
-	phase_send_msglen.sa_flags = SA_SIGINFO;
-	phase_send_msg.sa_flags = SA_SIGINFO;
+	g_request.phase_send_connection.sa_sigaction = ft_receive_ping_cnt;
+	g_request.phase_send_msglen.sa_sigaction = ft_receive_ping_len;
+	g_request.phase_send_msg.sa_sigaction = ft_receive_ping_str;
+	sigemptyset(&g_request.phase_send_connection.sa_mask);
+	sigemptyset(&g_request.phase_send_msglen.sa_mask);
+	sigemptyset(&g_request.phase_send_msg.sa_mask);
+	g_request.phase_send_connection.sa_flags = SA_SIGINFO;
+	g_request.phase_send_msglen.sa_flags = SA_SIGINFO;
+	g_request.phase_send_msg.sa_flags = SA_SIGINFO;
 }

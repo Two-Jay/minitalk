@@ -6,19 +6,38 @@
 /*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 21:31:47 by jekim             #+#    #+#             */
-/*   Updated: 2021/06/16 15:56:41 by jekim            ###   ########.fr       */
+/*   Updated: 2021/07/28 02:50:36 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_itoa(int n)
+static int	ft_intlen(int nbr)
+{
+	int	len;
+
+	len = 0;
+	if (nbr < 0)
+	{
+		nbr = nbr * -1;
+		len++;
+	}
+	while (nbr > 0)
+	{
+		nbr = nbr / 10;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_itoa(int n)
 {
 	char	*ret;
 	int		ix;
 
-	ix = ft_intlen(n, 10);
-	if (!(ret = (char *)malloc(sizeof(char) * (ix + 1))))
+	ix = ft_intlen(n);
+	ret = (char *)malloc(sizeof(char) * (ix + 1));
+	if (!ret)
 		return (NULL);
 	ret[ix--] = '\0';
 	if (n == 0)

@@ -3,34 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 23:41:52 by jekim             #+#    #+#             */
-/*   Updated: 2021/05/30 03:21:40 by jekim            ###   ########.fr       */
+/*   Updated: 2021/07/28 02:52:49 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_count_word(const char *src, char c)
+static int	ft_count_word(const char *src, char c)
 {
 	unsigned int	count;
 
 	count = 0;
-	while (*src++)
+	while (*src)
 	{
-		if (*src != c && (*(src + 1) == c || *(src + 1) == '\0'))
+		if (*src != c && *(src + 1) == c)
 			count++;
+		if (*src != c && !*(src + 1))
+			count++;
+		src++;
 	}
 	return (count);
 }
 
-static int		ft_wordlen(const char *src, char c)
+static int	ft_wordlen(const char *src, char c)
 {
 	unsigned int	len;
 
 	len = 0;
-	while (*src != c && *src != '\0')
+	while (*src != c && *src)
 	{
 		len++;
 		src++;
@@ -38,7 +41,7 @@ static int		ft_wordlen(const char *src, char c)
 	return (len);
 }
 
-static void		ft_free_error(char **bucket, unsigned int count)
+static void	ft_free_error(char **bucket, unsigned int count)
 {
 	unsigned int	ix;
 
@@ -51,7 +54,7 @@ static void		ft_free_error(char **bucket, unsigned int count)
 	free(bucket);
 }
 
-static char		**ft_fillbucket(const char *src, unsigned int count,
+static char	**ft_fillbucket(const char *src, unsigned int count,
 		char c, char **bucket)
 {
 	unsigned int	ix;
@@ -64,7 +67,8 @@ static char		**ft_fillbucket(const char *src, unsigned int count,
 		while (*src == c)
 			src++;
 		len = ft_wordlen(src, c);
-		if (!(bucket[ix] = (char *)malloc(sizeof(char) * (len + 1))))
+		bucket[ix] = (char *)malloc(sizeof(char) * (len + 1));
+		if (!bucket)
 		{
 			ft_free_error(bucket, ix);
 			return (NULL);
@@ -73,20 +77,23 @@ static char		**ft_fillbucket(const char *src, unsigned int count,
 		while (jx < len)
 			bucket[ix][jx++] = *(src++);
 		bucket[ix][jx] = '\0';
+		ix++;
 	}
 	bucket[ix] = NULL;
 	return (bucket);
 }
 
-char			**ft_split(const char *src, char c)
+char	**ft_split(const char *src, char c)
 {
 	char			**bucket;
 	unsigned int	count;
+	int				ix;
 
 	if (!src)
 		return (NULL);
 	count = ft_count_word(src, c);
-	if (!(bucket = (char **)malloc(sizeof(char *) * (count + 1))))
+	bucket = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!bucket)
 		return (NULL);
 	bucket = ft_fillbucket(src, count, c, bucket);
 	return (bucket);

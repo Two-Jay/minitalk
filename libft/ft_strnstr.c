@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 19:39:21 by jekim             #+#    #+#             */
-/*   Updated: 2021/01/11 01:37:42 by jseo             ###   ########.fr       */
+/*   Updated: 2021/07/28 03:01:54 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t n)
 {
-	size_t len;
+	size_t	len;
 
 	len = ft_strlen(little);
 	if (!little || !n || n < len)

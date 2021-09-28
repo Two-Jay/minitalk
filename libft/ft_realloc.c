@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <jekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 02:39:48 by jekim             #+#    #+#             */
-/*   Updated: 2021/05/30 03:21:24 by jekim            ###   ########.fr       */
+/*   Updated: 2021/07/28 02:51:50 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static size_t	ft_memlen(void *ptr)
 	return (ret);
 }
 
-static void		*ft_realloc_subfunc(void *src, void *ret,
+static void	*ft_realloc_subfunc(void *src, void *ret,
 			size_t copy_size, size_t malloc_size)
 {
 	ret = malloc(malloc_size);
@@ -37,7 +37,7 @@ static void		*ft_realloc_subfunc(void *src, void *ret,
 	return (ret);
 }
 
-void			*ft_realloc(void *src, size_t size)
+void	*ft_realloc(void *src, size_t size)
 {
 	void	*ret;
 	size_t	srcsize;

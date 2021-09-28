@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jekim <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jekim <arabi1549@naver.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 01:02:49 by jekim             #+#    #+#             */
-/*   Updated: 2021/01/11 14:52:55 by jseo             ###   ########.fr       */
+/*   Updated: 2021/07/28 03:02:19 by jekim            ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ unsigned int	ft_checkix(char const *s1, char const *set, int drc)
 	return (ret);
 }
 
-char			*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	char			*ret;
 	unsigned int	i;
@@ -45,7 +45,8 @@ char			*ft_strtrim(char const *s1, char const *set)
 	left_ix = ft_checkix(s1, set, 1);
 	right_ix = ft_checkix(s1, set, -1);
 	i = 0;
-	if (!(ret = (char *)malloc(right_ix - left_ix + 1)))
+	ret = (char *)malloc(right_ix - left_ix + 1);
+	if (!ret)
 		return (NULL);
 	while (i < (right_ix - left_ix))
 	{
